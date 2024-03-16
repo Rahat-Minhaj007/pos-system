@@ -48,7 +48,7 @@ function insert($tableName, $data)
     $table = validate($tableName);
 
     $column = array_keys($data);
-    $values = array_keys($data);
+    $values = array_values($data);
 
     $finalColumn = implode(',', $column);
 
