@@ -3,12 +3,19 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_DATABASE', 'pos_system');
+define('DB_NAME', 'pos_system');
 
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+/* Attempt to connect to MySQL database */
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+$connect = mysqli_connect(
+    DB_SERVER,
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_NAME
+);
+
+// Check connection
+
+if (!$connect) {
+    die("ERROR: Could not connect. " . mysqli_connect_error());
 }
-
-?>
