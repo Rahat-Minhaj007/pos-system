@@ -37,3 +37,47 @@ function alertMessage()
         unset($_SESSION['status']);
     }
 }
+
+// insert data into database using this function
+
+function insert($tableName, $data)
+{
+
+    global $connect;
+
+    $table = validate($tableName);
+
+    $column = array_keys($data);
+    $values = array_keys($data);
+
+    $finalColumn = implode(',', $column);
+
+    $finalValues = "'" . implode("', '", $values) . "'";
+
+    $query = "INSERT INTO $table ($finalColumn) VALUES ($finalValues)";
+    $result = mysqli_query($connect, $query);
+
+    return $result;
+}
+
+// update data into database using this function
+
+function update($tableName, $id, $data)
+{
+    global $connect;
+
+    $table = validate($tableName);
+    $id = validate($id);
+
+    $updateDataString = "";
+    foreach ($data as $column => $value) {
+        $updateDataString .= $column . '=' . "'$value',";
+    }
+
+    $finalUpdateData = substr(trim($updateDataString), 0, -1);
+
+    $query = "UPDATE $table SET $finalUpdateData WHERE id = $id";
+    $result = mysqli_query($connect, $query);
+
+    return $result;
+}
