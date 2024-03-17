@@ -81,3 +81,75 @@ function update($tableName, $id, $data)
 
     return $result;
 }
+
+// get all data from database using this function
+
+function getAllData($tableName, $status)
+{
+    global $connect;
+
+    $table = validate($tableName);
+    $status = validate($status);
+
+    if ($status == "status") {
+        $query = "SELECT * FROM $table WHERE status = '0'";
+    } else {
+        $query = "SELECT * FROM $table";
+    }
+
+    $result = mysqli_query($connect, $query);
+
+    return $result;
+}
+
+// get single data from database using this function
+
+function getSingleData($tableName, $id)
+{
+    global $connect;
+
+    $table = validate($tableName);
+    $id = validate($id);
+
+    $query = "SELECT * FROM $table WHERE id = '$id' LIMIT 1";
+    $result = mysqli_query($connect, $query);
+
+    if ($result) {
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            $response = [
+                'status' => 200,
+                'data' => $row,
+                'message' => 'Data found',
+            ];
+            return $response;
+        } else {
+            $response = [
+                'status' => 404,
+                'message' => 'Data not found'
+            ];
+            return $response;
+        }
+    } else {
+        $response = [
+            'status' => 500,
+            'message' => 'Something went wrong'
+        ];
+        return $response;
+    }
+}
+
+// delete data from database using this function
+
+function deleteData($tableName, $id)
+{
+    global $connect;
+
+    $table = validate($tableName);
+    $id = validate($id);
+
+    $query = "DELETE FROM $table WHERE id = '$id'";
+    $result = mysqli_query($connect, $query);
+
+    return $result;
+}
