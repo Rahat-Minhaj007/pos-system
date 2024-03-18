@@ -12,6 +12,11 @@ include("includes/header.php");
             </h4>
         </div>
         <div class="card-body">
+
+            <?php
+            alertMessage();
+            ?>
+
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>

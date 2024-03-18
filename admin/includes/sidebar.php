@@ -11,6 +11,7 @@
                     Dashboard
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
+
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-columns"></i>
@@ -26,6 +27,7 @@
                         <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                     </nav>
                 </div>
+
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-book-open"></i>
@@ -65,17 +67,26 @@
                         </div>
                     </nav>
                 </div>
-                <div class="sb-sidenav-menu-heading">Addons</div>
-                <a class="nav-link" href="charts.html">
+
+                <!-- New Manage Users -->
+                <div class="sb-sidenav-menu-heading">Manage Users</div>
+
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmins" aria-expanded="false" aria-controls="collapseAdmins">
                     <div class="sb-nav-link-icon">
-                        <i class="fas fa-chart-area"></i>
+                        <i class="fas fa-columns"></i>
                     </div>
-                    Charts
+                    Admins/Staff
+                    <div class="sb-sidenav-collapse-arrow">
+                        <i class="fas fa-angle-down"></i>
+                    </div>
                 </a>
-                <a class="nav-link" href="tables.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Tables
-                </a>
+                <div class="collapse" id="collapseAdmins" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="admins-create.php">Add Admin</a>
+                        <a class="nav-link" href="admins.php">View Admins</a>
+                    </nav>
+                </div>
+                <!--  -->
             </div>
         </div>
         <div class="sb-sidenav-footer">
