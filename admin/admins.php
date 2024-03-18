@@ -13,58 +13,69 @@ include("includes/header.php");
         </div>
         <div class="card-body">
 
+            <!-- Alert -->
             <?php
             alertMessage();
             ?>
+            <!-- Start -->
+            <?php
+            $admins = getAllData('admins', null);
+            if (!$admins) {
+                echo "h4 class='text-center mb-0'>Something Went Wrong</h4>";
+                return false;
+            }
+            if (mysqli_num_rows($admins) > 0) {
+            ?>
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th class="text-center">
-                                SI
-                            </th>
-                            <th class="text-center">
-                                ID
-                            </th>
-                            <th class="text-center">
-                                Name
-                            </th>
-                            <th class="text-center">
-                                Email
-                            </th>
-                            <th class="text-center">
-                                Action
-                            </th>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    ID
+                                </th>
+                                <th class="text-center">
+                                    Name
+                                </th>
+                                <th class="text-center">
+                                    Email
+                                </th>
+                                <th class="text-center">
+                                    Action
+                                </th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">
-                                1
-                            </td>
-                            <td class="text-center">
-                                487
-                            </td>
-                            <td class="text-center">
-                                Minhajul Abedin Rahat
-                            </td>
-                            <td class="text-center">
-                                rahat55@gmail.com
-                            </td>
-                            <td class="text-center">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <button type="button" class="btn btn-warning me-2">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                </div>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                            </td>
-                        </tr>
 
-                    </tbody>
-                </table>
-            </div>
+                            <?php foreach ($admins as $adminItem) :  ?>
+                                <tr>
+                                    <td class="text-center"><?= $adminItem['id'] ?></td>
+                                    <td class="text-center"><?= $adminItem['name'] ?></td>
+                                    <td class="text-center"><?= $adminItem['email'] ?></td>
+                                    <td class="text-center">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a href="admins-edit.php?id=<?= $adminItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
+                                            <a href="admins-delete.php" class="btn btn-danger btn-sm">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End -->
+            <?php
+            } else {
+            ?>
+
+                <h4 class='text-center mb-0'>No data found</h4>
+
+            <?php
+            }
+            ?>
 
         </div>
     </div>

@@ -1,6 +1,6 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html" style="
+    <a class="navbar-brand ps-3" href="/pos-system-in-php/admin" style="
     font-size: 30px;
     font-weight: bold;
     font-family: 'Times New Roman', Times, serif;
