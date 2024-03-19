@@ -57,7 +57,7 @@ include("includes/header.php");
                                     <td class="text-center">
                                         <div class="d-flex align-items-center justify-content-center">
                                             <a href="admins-edit.php?id=<?= $adminItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
-                                            <a href="admins-delete.php" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="admins-delete.php?id=<?= $adminItem['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                                         </div>
                                     </td>
                                 </tr>

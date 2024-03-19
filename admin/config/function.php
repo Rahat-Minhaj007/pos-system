@@ -153,3 +153,18 @@ function deleteData($tableName, $id)
 
     return $result;
 }
+
+// check parameter is set or not
+
+function checkParam($type)
+{
+    if (isset($_GET[$type])) {
+        if ($_GET[$type] != '') {
+            return $_GET[$type];
+        } else {
+            return '<h5>No id found!</h5>';
+        }
+    } else {
+        return '<h5>No id given!</h5>';
+    }
+}
