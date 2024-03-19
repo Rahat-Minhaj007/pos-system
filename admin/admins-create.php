@@ -53,6 +53,7 @@ include("includes/header.php");
                         <label for="">
                             Is Ban
                         </label>
+                        <br>
                         <input type="checkbox" name="is_ban" style="width:30px;height:30px">
                     </div>
 
