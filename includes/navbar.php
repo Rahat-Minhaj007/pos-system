@@ -12,10 +12,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="index.php">HOME</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">LOGIN</a>
-                </li>
-
+                <?php if (isset($_SESSION['loggedIn'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><?= $_SESSION['loggedInUser']['name']; ?> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="logout.php">LOGOUT</a>
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="btn btn-dark" href="login.php">LOGIN</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

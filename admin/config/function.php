@@ -168,3 +168,10 @@ function checkParam($type)
         return '<h5>No id given!</h5>';
     }
 }
+
+
+function logoutSession()
+{
+    unset($_SESSION['loggedIn']);
+    unset($_SESSION['loggedInUser']);
+}
