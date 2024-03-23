@@ -91,7 +91,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
-            Rahat Minhaj
+            <?= $_SESSION['loggedInUser']['name']; ?>
         </div>
     </nav>
 
