@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
     <div class="container">
 
         <a class="navbar-brand fw-bold" href="#">POS SYSTEM</a>

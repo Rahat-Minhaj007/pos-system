@@ -9,9 +9,9 @@ if (isset($_SESSION['loggedIn'])) {
 }
 ?>
 
-<div class="py-5 bg-light" style="min-height:92vh;">
+<div class="py-5 bg-light" style="min-height:100vh;">
     <div class="container mt-5">
-        <div class="row">
+        <div class="row" style="position:relative;">
             <div class="col-md-6 mx-auto">
                 <div class="card shadow rounded-4 ">
 
