@@ -121,3 +121,30 @@ if (isset($_POST["saveCategory"])) {
         redirect("create-category.php", "Please fill required fields. ");
     }
 }
+
+
+if (isset($_POST['updateCategory'])) {
+
+
+    $categoryId = validate($_POST['categoryId']);
+    $name = validate($_POST['name']);
+    $description = validate($_POST['description']);
+    $status = isset($_POST['status']) == true ? 1 : 0;
+
+    if ($name != "") {
+        $data = [
+            'name' => $name,
+            'description' => $description,
+            'status' => $status
+        ];
+
+        $result = update('categories', $categoryId, $data);
+        if ($result) {
+            redirect("categories-edit.php?id=" . $categoryId, "Category updated successfully!");
+        } else {
+            redirect("categories-edit.php?id=" . $categoryId, "Something went wrong!");
+        }
+    } else {
+        redirect("categories-edit.php?id=" . $categoryId, "Please fill required fields. ");
+    }
+}
