@@ -7,8 +7,8 @@ include("includes/header.php");
 
     <div class="card mt-4 shadow-sm">
         <div class="card-header">
-            <h4 class="mb-0">Admins/Staff
-                <a href="admins-create.php" class="btn btn-primary float-end">ADD ADMIN</a>
+            <h4 class="mb-0">Categories
+                <a href="create-category.php" class="btn btn-primary float-end">ADD CATEGORY</a>
             </h4>
         </div>
         <div class="card-body">
@@ -19,12 +19,12 @@ include("includes/header.php");
             ?>
             <!-- Start -->
             <?php
-            $admins = getAllData('admins', null);
-            if (!$admins) {
+            $categories = getAllData('categories', null);
+            if (!$categories) {
                 echo "h4 class='text-center mb-0'>Something Went Wrong</h4>";
                 return false;
             }
-            if (mysqli_num_rows($admins) > 0) {
+            if (mysqli_num_rows($categories) > 0) {
             ?>
 
                 <div class="table-responsive">
@@ -38,9 +38,6 @@ include("includes/header.php");
                                     Name
                                 </th>
                                 <th class="text-center">
-                                    Email
-                                </th>
-                                <th class="text-center">
                                     Status
                                 </th>
                                 <th class="text-center">
@@ -52,18 +49,17 @@ include("includes/header.php");
                         <tbody>
 
 
-                            <?php foreach ($admins as $adminItem) :  ?>
+                            <?php foreach ($categories as $categoryItem) :  ?>
                                 <tr>
-                                    <td class="text-center"><?= $adminItem['id'] ?></td>
-                                    <td class="text-center"><?= $adminItem['name'] ?></td>
-                                    <td class="text-center"><?= $adminItem['email'] ?></td>
+                                    <td class="text-center"><?= $categoryItem['id'] ?></td>
+                                    <td class="text-center"><?= $categoryItem['name'] ?></td>
                                     <td class="text-center">
                                         <?php
 
-                                        if ($adminItem['is_ban'] == 1) {
-                                            echo "<span class='badge bg-danger'>Banned</span>";
+                                        if ($categoryItem['status'] == 1) {
+                                            echo "<span class='badge bg-danger'>Hidden</span>";
                                         } else {
-                                            echo "<span class='badge bg-success'>Active</span>";
+                                            echo "<span class='badge bg-success'>Visible</span>";
                                         }
 
                                         ?>
@@ -71,8 +67,8 @@ include("includes/header.php");
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="admins-edit.php?id=<?= $adminItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
-                                            <a href="admins-delete.php?id=<?= $adminItem['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="categories-edit.php?id=<?= $categoryItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
+                                            <a href="categories-delete.php?id=<?= $categoryItem['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                                         </div>
                                     </td>
                                 </tr>

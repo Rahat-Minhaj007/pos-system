@@ -97,3 +97,27 @@ if (isset($_POST['updateAdmin'])) {
         redirect("admins-edit.php?id=" . $adminId, "please fill required fields. ");
     }
 }
+
+if (isset($_POST["saveCategory"])) {
+
+    $name = validate($_POST['name']);
+    $description = validate($_POST['description']);
+    $status = isset($_POST['status']) == true ? 1 : 0;
+
+    if ($name != "") {
+        $data = [
+            'name' => $name,
+            'description' => $description,
+            'status' => $status
+        ];
+
+        $result = insert('categories', $data);
+        if ($result) {
+            redirect("categories-list.php", "Category created successfully!");
+        } else {
+            redirect("create-category.php", "Something went wrong!");
+        }
+    } else {
+        redirect("create-category.php", "Please fill required fields. ");
+    }
+}
