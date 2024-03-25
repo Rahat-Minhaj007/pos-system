@@ -41,6 +41,12 @@ include("includes/header.php");
                                     Name
                                 </th>
                                 <th class="text-center">
+                                    Price
+                                </th>
+                                <th class="text-center">
+                                    Quantity
+                                </th>
+                                <th class="text-center">
                                     Status
                                 </th>
                                 <th class="text-center">
@@ -59,6 +65,8 @@ include("includes/header.php");
                                         <img src="../<?= $productItem['image']; ?>" alt="ProductImage" style="width:50px;height:50px;object-fit: contain;">
                                     </td>
                                     <td class="text-center"><?= $productItem['name']; ?></td>
+                                    <td class="text-center"><?= $productItem['price']; ?></td>
+                                    <td class="text-center"><?= $productItem['quantity']; ?></td>
                                     <td class="text-center">
                                         <?php
 

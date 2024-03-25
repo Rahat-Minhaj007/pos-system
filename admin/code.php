@@ -148,3 +148,49 @@ if (isset($_POST['updateCategory'])) {
         redirect("categories-edit.php?id=" . $categoryId, "Please fill required fields. ");
     }
 }
+
+
+if (isset($_POST['saveProduct'])) {
+
+    $category_id = validate($_POST['category_id']);
+    $name = validate($_POST['name']);
+    $description = validate($_POST['description']);
+    $status = isset($_POST['status']) == true ? 1 : 0;
+    $price = validate($_POST['price']);
+    $quantity = validate($_POST['quantity']);
+
+    if ($name != "" && $price != "" && $quantity != "" && $category_id != "") {
+
+
+        if ($_FILES['image']['size'] > 0) {
+
+            $path = '../assets/uploads/products';
+            $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            $fileName = time() . '.' . $image_ext;
+            move_uploaded_file($_FILES['image']['tmp_name'], $path . "/" . $fileName);
+
+            $finalImage = "assets/uploads/products/" . $fileName;
+        } else {
+            $finalImage = "";
+        }
+
+        $data = [
+            'category_id' => $category_id,
+            'name' => $name,
+            'description' => $description,
+            'status' => $status,
+            'price' => $price,
+            'quantity' => $quantity,
+            'image' => $finalImage
+        ];
+
+        $result = insert('products', $data);
+        if ($result) {
+            redirect("products-list.php", "Product created successfully!");
+        } else {
+            redirect("products-category.php", "Something went wrong!");
+        }
+    } else {
+        redirect("create-product.php", "Please fill required fields. ");
+    }
+}
