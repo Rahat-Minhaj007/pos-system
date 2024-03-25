@@ -7,8 +7,8 @@ include("includes/header.php");
 
     <div class="card mt-4 shadow-sm">
         <div class="card-header">
-            <h4 class="mb-0">Category List
-                <a href="create-category.php" class="btn btn-primary float-end">ADD CATEGORY</a>
+            <h4 class="mb-0">Product List
+                <a href="create-product.php" class="btn btn-primary float-end">ADD PRODUCT</a>
             </h4>
         </div>
         <div class="card-body">
@@ -19,12 +19,12 @@ include("includes/header.php");
             ?>
             <!-- Start -->
             <?php
-            $categories = getAllData('categories', null);
-            if (!$categories) {
+            $products = getAllData('products', null);
+            if (!$products) {
                 echo "h4 class='text-center mb-0'>Something Went Wrong</h4>";
                 return false;
             }
-            if (mysqli_num_rows($categories) > 0) {
+            if (mysqli_num_rows($products) > 0) {
             ?>
 
                 <div class="table-responsive">
@@ -33,6 +33,9 @@ include("includes/header.php");
                             <tr>
                                 <th class="text-center">
                                     ID
+                                </th>
+                                <th class="text-center">
+                                    Image
                                 </th>
                                 <th class="text-center">
                                     Name
@@ -49,14 +52,17 @@ include("includes/header.php");
                         <tbody>
 
 
-                            <?php foreach ($categories as $categoryItem) :  ?>
+                            <?php foreach ($products as $productItem) :  ?>
                                 <tr>
-                                    <td class="text-center"><?= $categoryItem['id'] ?></td>
-                                    <td class="text-center"><?= $categoryItem['name'] ?></td>
+                                    <td class="text-center"><?= $productItem['id']; ?></td>
+                                    <td class="text-center">
+                                        <img src="../<?= $productItem['image']; ?>" alt="ProductImage" style="width:50px;height:50px;object-fit: contain;">
+                                    </td>
+                                    <td class="text-center"><?= $productItem['name']; ?></td>
                                     <td class="text-center">
                                         <?php
 
-                                        if ($categoryItem['status'] == 1) {
+                                        if ($productItem['status'] == 1) {
                                             echo "<span class='badge bg-danger'>Hidden</span>";
                                         } else {
                                             echo "<span class='badge bg-success'>Visible</span>";
@@ -67,8 +73,8 @@ include("includes/header.php");
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="categories-edit.php?id=<?= $categoryItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
-                                            <a href="categories-delete.php?id=<?= $categoryItem['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="categories-edit.php?id=<?= $productItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
+                                            <a href="categories-delete.php?id=<?= $productItem['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
