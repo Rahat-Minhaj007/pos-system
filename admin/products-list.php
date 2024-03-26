@@ -81,8 +81,8 @@ include("includes/header.php");
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="categories-edit.php?id=<?= $productItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
-                                            <a href="categories-delete.php?id=<?= $productItem['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="product-edit.php?id=<?= $productItem['id'] ?>" class="btn btn-warning btn-sm me-2">Edit</a>
+                                            <a href="product-delete.php?id=<?= $productItem['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
