@@ -61,7 +61,7 @@ include("includes/header.php");
                         </div>
                 <?php
                     } else {
-                        echo '<h5>' . $adminData['message'] . '</h5>';
+                        echo '<h5>' . $categoryData['message'] . '</h5>';
                     }
                 } else {
                     echo 'Something went wrong!';
