@@ -61,66 +61,69 @@ include("includes/header.php");
         </div>
     </div>
 
-    <?php
-    if (isset($_SESSION['productItems']) && count($_SESSION['productItems']) > 0) {
-    ?>
-        <div class="card mt-4 shadow-sm">
-            <div class="card-header">
-                <h4 class="mb-0">
-                    Order Items
-                </h4>
-            </div>
-            <div class="card-body">
 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>SL</th>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Subtotal</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $total = 0;
-                        foreach ($_SESSION['productItems'] as $key => $productItem) {
-                            $subtotal = $productItem['price'] * $productItem['quantity'];
-                            $total += $subtotal;
-                        ?>
-                            <tr>
-                                <td><?php echo $key + 1; ?></td>
-                                <td><?php echo $productItem['name']; ?></td>
-                                <td><?php echo $productItem['price']; ?></td>
-                                <td><?php echo $productItem['quantity']; ?></td>
-                                <td><?php echo $subtotal; ?></td>
-                                <td>
-                                    <a href="orders-code.php?removeItem=<?php echo $key; ?>" class="btn btn-danger">Remove</a>
-                                </td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                        <tr>
-                            <td colspan="4" class="text-end">Total</td>
-                            <td><?php echo $total; ?></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <!-- Display order products -->
 
-                <form action="orders-code.php" method="POST">
-                    <input type="hidden" name="total" value="<?php echo $total; ?>" />
-                    <button type="submit" name="createOrder" class="btn btn-primary">Create Order</button>
-                </form>
-
-            </div>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h4 class="mb-0">Order Products</h4>
         </div>
-    <?php
-    }
-    ?>
+        <div class="card-body">
+            <?php
+            if (isset($_SESSION['productItems']) && count($_SESSION['productItems']) > 0) {
+                $seasonProducts = $_SESSION['productItems'];
+            ?>
+                <div class="table-responsive mb-3">
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Product Name</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Total Price</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            foreach ($seasonProducts as $key => $product) :
+                            ?>
+                                <tr>
+                                    <td class="text-center"><?= $i++; ?></td>
+                                    <td class="text-center"><?= $product['name'] ?></td>
+                                    <td class="text-center"><?= $product['price'] ?></td>
+                                    <td class="text-center">
+                                        <div class="input-group d-flex justify-content-center">
+                                            <button class="input-group-text">-</button>
+                                            <input type="text" class="qty quantityInput text-center" value="<?= $product['quantity'] ?>" />
+                                            <button class="input-group-text">+</button>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <?= number_format($product['price'] * $product['quantity'], 0) ?>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a href="order-item-delete.php?index=<?= $key; ?>" class="btn btn-danger">Remove</a>
+                                    </td>
+
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                    </table>
+                </div>
+            <?php
+            } else {
+                echo "<h4 class='text-center'>No Product Found</h4>";
+            }
+            ?>
+        </div>
+    </div>
 
 </div>
 
