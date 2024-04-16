@@ -120,7 +120,7 @@ include("includes/header.php");
                 </div>
             <?php
             } else {
-                echo "<h4 class='text-center'>No Product Found</h4>";
+                echo "<h4 class='text-center'>No product added !</h4>";
             }
             ?>
         </div>
