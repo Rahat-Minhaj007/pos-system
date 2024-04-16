@@ -68,12 +68,12 @@ include("includes/header.php");
         <div class="card-header">
             <h4 class="mb-0">Order Products</h4>
         </div>
-        <div class="card-body">
+        <div class="card-body" id="productArea">
             <?php
             if (isset($_SESSION['productItems']) && count($_SESSION['productItems']) > 0) {
                 $seasonProducts = $_SESSION['productItems'];
             ?>
-                <div class="table-responsive mb-3">
+                <div class="table-responsive mb-3" id="productContent">
 
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -96,10 +96,11 @@ include("includes/header.php");
                                     <td class="text-center"><?= $product['name'] ?></td>
                                     <td class="text-center"><?= $product['price'] ?></td>
                                     <td class="text-center">
-                                        <div class="input-group d-flex justify-content-center">
-                                            <button class="input-group-text">-</button>
+                                        <div class="input-group d-flex justify-content-center qtyBox">
+                                            <input type="hidden" value="<?= $product['product_id'] ?>" class="productId" />
+                                            <button class="input-group-text qtyDecrement">-</button>
                                             <input type="text" class="qty quantityInput text-center" value="<?= $product['quantity'] ?>" />
-                                            <button class="input-group-text">+</button>
+                                            <button class="input-group-text qtyIncrement">+</button>
                                         </div>
                                     </td>
 

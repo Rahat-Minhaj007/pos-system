@@ -14,3 +14,15 @@
   .select2-selection__arrow {
   height: 38px !important;
 }
+
+.quantityInput {
+  width: 50px !important;
+  height: 38px;
+  text-align: center;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  color: #495057;
+}

@@ -12,6 +12,9 @@ if (!isset($_SESSION['productItemIds'])) {
     $_SESSION['productItemIds'] = [];
 }
 
+
+
+// add item to order
 if (isset($_POST['addItem'])) {
     $productId = validate($_POST['product_id']);
     $quantity = validate($_POST['quantity']);
@@ -65,5 +68,32 @@ if (isset($_POST['addItem'])) {
         }
     } else {
         redirect('order-create.php', 'Something went wrong');
+    }
+}
+
+
+// product  quantity increase or decrease
+if (isset($_POST['productIncDec'])) {
+
+    $productId = validate($_POST['product_id']);
+    $quantity = validate($_POST['quantity']);
+
+    error_log("Product ID: " . $productId);
+    error_log("Quantity: " . $quantity);
+
+    $flag = false;
+
+    foreach ($_SESSION['productItems'] as $key => $productItem) {
+
+        if ($productItem['product_id'] == $productId) {
+            $flag = true;
+            $_SESSION['productItems'][$key]['quantity'] = $quantity;
+        }
+    }
+
+    if ($flag) {
+        jsonResponse(200, 'success', 'Quantity updated');
+    } else {
+        jsonResponse(500, 'error', 'Something went wrong, please try again');
     }
 }
