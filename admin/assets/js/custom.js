@@ -1,6 +1,7 @@
 $(document).ready(function () {
   alertify.set("notifier", "position", "top-right");
 
+  // Increment Quantity
   $(document).on("click", ".qtyIncrement", function () {
     // increment quantity
     var $quantityInput = $(this).closest(".qtyBox").find(".quantityInput");
@@ -14,6 +15,7 @@ $(document).ready(function () {
     }
   });
 
+  // Decrement Quantity
   $(document).on("click", ".qtyDecrement", function () {
     // decrement quantity
     var $quantityInput = $(this).closest(".qtyBox").find(".quantityInput");
@@ -27,6 +29,7 @@ $(document).ready(function () {
     }
   });
 
+  // Increment and Decrement Quantity Function
   function quantityIncDec(productId, quantity) {
     console.log("productId:", productId, "quantity:", quantity);
     $.ajax({
@@ -55,4 +58,29 @@ $(document).ready(function () {
       },
     });
   }
+
+  //process order
+  $(document).on("click", ".proceedToPlace", function () {
+    console.log("Proceed to place order clicked");
+    var paymentMethod = $("#payment_method").val();
+    var phoneNumber = $("#cphone").val();
+
+    if (paymentMethod == "") {
+      swal({
+        title: "Please select payment method",
+        icon: "warning",
+        button: "Ok",
+      });
+      return false;
+    }
+
+    if (phoneNumber == "" && !$.isNumeric(phoneNumber)) {
+      swal({
+        title: "Please enter valid phone number",
+        icon: "warning",
+        button: "Ok",
+      });
+      return false;
+    }
+  });
 });

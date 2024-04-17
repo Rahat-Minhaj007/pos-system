@@ -64,59 +64,83 @@ include("includes/header.php");
 
     <!-- Display order products -->
 
-    <div class="card mt-5">
+    <div class="card my-5">
         <div class="card-header">
             <h4 class="mb-0">Order Products</h4>
         </div>
-        <div class="card-body" id="productArea">
+        <div class="card-body">
             <?php
             if (isset($_SESSION['productItems']) && count($_SESSION['productItems']) > 0) {
                 $seasonProducts = $_SESSION['productItems'];
             ?>
-                <div class="table-responsive mb-3" id="productContent">
+                <div id="productArea">
+                    <div class="table-responsive mb-3" id="productContent">
 
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Product Name</th>
-                                <th class="text-center">Price</th>
-                                <th class="text-center">Quantity</th>
-                                <th class="text-center">Total Price</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($seasonProducts as $key => $product) :
-                            ?>
+                        <table class="table table-bordered table-striped">
+                            <thead>
                                 <tr>
-                                    <td class="text-center"><?= $i++; ?></td>
-                                    <td class="text-center"><?= $product['name'] ?></td>
-                                    <td class="text-center"><?= $product['price'] ?></td>
-                                    <td class="text-center">
-                                        <div class="input-group d-flex justify-content-center qtyBox">
-                                            <input type="hidden" value="<?= $product['product_id'] ?>" class="productId" />
-                                            <button class="input-group-text qtyDecrement">-</button>
-                                            <input type="text" class="qty quantityInput text-center" value="<?= $product['quantity'] ?>" />
-                                            <button class="input-group-text qtyIncrement">+</button>
-                                        </div>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <?= number_format($product['price'] * $product['quantity'], 0) ?>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <a href="order-item-delete.php?index=<?= $key; ?>" class="btn btn-danger">Remove</a>
-                                    </td>
-
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Product Name</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Total Price</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                foreach ($seasonProducts as $key => $product) :
+                                ?>
+                                    <tr>
+                                        <td class="text-center"><?= $i++; ?></td>
+                                        <td class="text-center"><?= $product['name'] ?></td>
+                                        <td class="text-center"><?= $product['price'] ?></td>
+                                        <td class="text-center">
+                                            <div class="input-group d-flex justify-content-center qtyBox">
+                                                <input type="hidden" value="<?= $product['product_id'] ?>" class="productId" />
+                                                <button class="input-group-text qtyDecrement">-</button>
+                                                <input type="text" class="qty quantityInput text-center" value="<?= $product['quantity'] ?>" />
+                                                <button class="input-group-text qtyIncrement">+</button>
+                                            </div>
+                                        </td>
 
-                    </table>
+                                        <td class="text-center">
+                                            <?= number_format($product['price'] * $product['quantity'], 0) ?>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <a href="order-item-delete.php?index=<?= $key; ?>" class="btn btn-danger">Remove</a>
+                                        </td>
+
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Select Payment Method</label>
+                            <select id="payment_method" class="form-control">
+                                <option value="">-- Select Payment --</option>
+                                <option value="Cash Payment">Cash Payment</option>
+                                <option value="Online Payment">Online Payment</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Customer Phone Number</label>
+                            <input type="number" id="cphone" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <br />
+                            <button type="button" class="btn btn-warning w-100 proceedToPlace">Proceed to place order</button>
+                        </div>
+                    </div>
                 </div>
             <?php
             } else {
