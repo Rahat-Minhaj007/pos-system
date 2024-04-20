@@ -97,3 +97,32 @@ if (isset($_POST['productIncDec'])) {
         jsonResponse(500, 'error', 'Something went wrong, please try again');
     }
 }
+
+
+if (isset($_POST['proceedToPlaceBtn'])) {
+
+    $phone = validate($_POST['cphone']);
+    $payment_method = validate($_POST['payment_method']);
+
+    // checking customer
+
+    $query = "SELECT * FROM customers WHERE phone='$phone' LIMIT 1";
+
+    $checkCustomer = mysqli_query($connect, $query);
+
+    if ($checkCustomer) {
+        if (mysqli_num_rows($checkCustomer) > 0) {
+            $_SESSION['invoice_no'] = 'INV' . rand(100000, 999999);
+            $_SESSION['cphone'] = $phone;
+            $_SESSION['payment_method'] = $payment_method;
+
+            jsonResponse(200, 'success', 'Customer found, please proceed to place order');
+        } else {
+            $_SESSION['cphone'] = $phone;
+
+            jsonResponse(404, 'warning', 'Customer not found, please add customer details');
+        }
+    } else {
+        jsonResponse(500, 'error', 'Something went wrong, please try again');
+    }
+}

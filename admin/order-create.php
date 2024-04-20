@@ -2,7 +2,38 @@
 include("includes/header.php");
 ?>
 
+<!-- Modal -->
 
+<div class="modal fade" id="customerAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">ADD CUSTOMER</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label>Enter Customer Name</label>
+                    <input type="text" id="c_name" class="form-control" placeholder="Enter Customer Name">
+                </div>
+                <div class="mb-3">
+                    <label>Enter Customer Phone</label>
+                    <input type="number" id="c_phone" class="form-control" placeholder="Enter Customer Phone">
+                </div>
+                <div class="mb-3">
+                    <label>Enter Customer Email (Optional)</label>
+                    <input type="email" id="c_email" class="form-control" placeholder="Enter Customer Email">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn btn-primary saveCustomer">SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->
 <div class="container-fluid px-4">
 
     <div class="card mt-4 shadow-sm">

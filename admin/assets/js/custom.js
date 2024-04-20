@@ -61,7 +61,6 @@ $(document).ready(function () {
 
   //process order
   $(document).on("click", ".proceedToPlace", function () {
-    console.log("Proceed to place order clicked");
     var paymentMethod = $("#payment_method").val();
     var phoneNumber = $("#cphone").val();
 
@@ -82,5 +81,46 @@ $(document).ready(function () {
       });
       return false;
     }
+
+    var data = {
+      proceedToPlaceBtn: true,
+      payment_method: paymentMethod,
+      cphone: phoneNumber,
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "orders-code.php",
+      data: data,
+
+      success: function (response) {
+        var res = JSON.parse(response);
+
+        if (parseInt(res.status) === 200) {
+          window.location.href = "order-summary.php";
+        } else if (parseInt(res.status) === 404) {
+          swal(res.message, res.message, res.status_type, {
+            buttons: {
+              catch: {
+                text: "Add Customer",
+                value: "catch",
+              },
+              cancel: "Cancel",
+            },
+          }).then((value) => {
+            switch (value) {
+              case "catch":
+                $("#customerAddModal").modal("show");
+                console.log("pop the customer add modal");
+                break;
+              default:
+                break;
+            }
+          });
+        } else {
+          swal(res.message, res.message, res.status_type);
+        }
+      },
+    });
   });
 });
