@@ -98,7 +98,7 @@ if (isset($_POST['productIncDec'])) {
     }
 }
 
-
+// proceed to place order
 if (isset($_POST['proceedToPlaceBtn'])) {
 
     $phone = validate($_POST['cphone']);
@@ -124,5 +124,30 @@ if (isset($_POST['proceedToPlaceBtn'])) {
         }
     } else {
         jsonResponse(500, 'error', 'Something went wrong, please try again');
+    }
+}
+
+
+if (isset($_POST['saveCustomerBtn'])) {
+    $name = validate($_POST['name']);
+    $phone = validate($_POST['phone']);
+    $email = validate($_POST['email']);
+
+    if ($name != "" && $phone != "") {
+        $data = [
+            'name' => $name,
+            'phone' => $phone,
+            'email' => $email
+
+        ];
+
+        $result = insert("customers", $data);
+        if ($result) {
+            jsonResponse(200, 'success', 'Customer added successfully');
+        } else {
+            jsonResponse(500, 'error', 'Something went wrong, please try again');
+        }
+    } else {
+        jsonResponse(422, 'error', 'Please fill all fields');
     }
 }

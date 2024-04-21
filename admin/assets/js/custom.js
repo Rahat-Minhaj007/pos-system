@@ -110,6 +110,7 @@ $(document).ready(function () {
           }).then((value) => {
             switch (value) {
               case "catch":
+                $("#c_phone").val(phoneNumber);
                 $("#customerAddModal").modal("show");
                 console.log("pop the customer add modal");
                 break;
@@ -122,5 +123,50 @@ $(document).ready(function () {
         }
       },
     });
+  });
+
+  // Add Customer
+
+  $(document).on("click", ".saveCustomer", function () {
+    var c_name = $("#c_name").val();
+    var c_email = $("#c_email").val();
+    var c_phone = $("#c_phone").val();
+
+    if (c_name != "" && c_phone != "") {
+      if ($.isNumeric(c_phone)) {
+        var data = {
+          saveCustomerBtn: true,
+          name: c_name,
+          email: c_email,
+          phone: c_phone,
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "orders-code.php",
+          data: data,
+
+          success: function (response) {
+            var res = JSON.parse(response);
+
+            if (res.status == 200) {
+              $("#customerAddModal").modal("hide");
+              swal(res.message, res.message, res.status_type);
+            } else if (res.status == 422) {
+              swal(res.message, res.message, res.status_type);
+            } else {
+              swal(res.message, res.message, res.status_type);
+            }
+          },
+        });
+      } else {
+        swal({
+          title: "Please enter valid phone number",
+          icon: "warning",
+          button: "Ok",
+        });
+      }
+    } else {
+    }
   });
 });
