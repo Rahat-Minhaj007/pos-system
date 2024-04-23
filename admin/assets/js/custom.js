@@ -169,4 +169,25 @@ $(document).ready(function () {
     } else {
     }
   });
+
+  $(document).on("click", "#saveOrder", function () {
+    var data = {
+      saveOrder: true,
+    };
+    $.ajax({
+      type: "POST",
+      url: "orders-code.php",
+      data: data,
+
+      success: function (response) {
+        var res = JSON.parse(response);
+
+        if (res.status === 200) {
+          swal(res.message, res.message, res.status_type);
+        } else {
+          swal(res.message, res.message, res.status_type);
+        }
+      },
+    });
+  });
 });

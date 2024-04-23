@@ -33,7 +33,7 @@ if (!isset($_SESSION['productItems'])) {
                         if (mysqli_num_rows($checkCustomer) > 0) {
                             $customer = mysqli_fetch_assoc($checkCustomer);
                 ?>
-                            <table style="width:100%; margin-bottom:20px;">
+                            <table style="width:100%; margin-bottom:30px;">
                                 <tbody>
                                     <tr>
                                         <td style="text-align:center;" colspan="2">
@@ -76,11 +76,11 @@ if (!isset($_SESSION['productItems'])) {
                         <table style="width:100%" cellPadding="5">
                             <thead>
                                 <tr>
-                                    <th align="start" style="border-bottom:1px solid #ccc;" width="5%">ID</th>
-                                    <th align="start" style="border-bottom:1px solid #ccc;">Product Name</th>
-                                    <th align="start" style="border-bottom:1px solid #ccc;" width="10%">Price</th>
-                                    <th align="start" style="border-bottom:1px solid #ccc;" width="10%">Quantity</th>
-                                    <th align="start" style="border-bottom:1px solid #ccc;" width="15%">Total Price</th>
+                                    <th align="start" style="border-bottom:1px solid #ccc;text-align:center;" width="5%">ID</th>
+                                    <th align="start" style="border-bottom:1px solid #ccc;text-align:center;">Product Name</th>
+                                    <th align="start" style="border-bottom:1px solid #ccc;text-align:center;" width="10%">Price</th>
+                                    <th align="start" style="border-bottom:1px solid #ccc;text-align:center;" width="10%">Quantity</th>
+                                    <th align="start" style="border-bottom:1px solid #ccc;text-align:center;" width="15%">Total Price</th>
 
                                 </tr>
                             </thead>
@@ -94,21 +94,21 @@ if (!isset($_SESSION['productItems'])) {
 
                                 ?>
                                     <tr>
-                                        <td style="border-bottom:1px solid #ccc;"><?= $i++ ?></td>
-                                        <td style="border-bottom:1px solid #ccc;"><?= $row['name'] ?></td>
-                                        <td style="border-bottom:1px solid #ccc;"><?= number_format($row['price'], 0) ?></td>
-                                        <td style="border-bottom:1px solid #ccc;"><?= $row['quantity'] ?></td>
-                                        <td style="border-bottom:1px solid #ccc;" class="fw-bold"><?= number_format($row['price'] * $row['quantity'], 0) ?></td>
+                                        <td style="border-bottom:1px solid #ccc;text-align:center;"><?= $i++ ?></td>
+                                        <td style="border-bottom:1px solid #ccc;text-align:center;"><?= $row['name'] ?></td>
+                                        <td style="border-bottom:1px solid #ccc;text-align:center;"><?= number_format($row['price'], 0) ?></td>
+                                        <td style="border-bottom:1px solid #ccc;text-align:center;"><?= $row['quantity'] ?></td>
+                                        <td style="border-bottom:1px solid #ccc;text-align:center;" class="fw-bold"><?= number_format($row['price'] * $row['quantity'], 0) ?></td>
 
                                     </tr>
 
                                 <?php endforeach; ?>
                                 <tr>
-                                    <td colspan="4" style="border-bottom:1px solid #ccc;" align="end">Total Amount</td>
-                                    <td colspan="1" style="border-bottom:1px solid #ccc;" class="fw-bold"><?= number_format($totalAmount, 0) ?></td>
+                                    <td colspan="4" style="border-bottom:1px solid #ccc;" align="end" class="fw-bold">Total Amount</td>
+                                    <td colspan="1" style="border-bottom:1px solid #ccc;text-align:center;" class="fw-bold"><?= number_format($totalAmount, 0) ?></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5">Payment Mode: <?= $_SESSION["payment_method"] ?></td>
+                                    <td colspan="5" class="fw-bold">Payment Mode: <?= $_SESSION["payment_method"] ?></td>
                                 </tr>
                             </tbody>
 
@@ -122,6 +122,13 @@ if (!isset($_SESSION['productItems'])) {
                 ?>
 
             </div>
+
+            <?php if (isset($_SESSION['productItems'])) : ?>
+                <div class="mt-4 mb-3 text-end">
+                    <button type="button" class="btn btn-primary px-4 mx-1" id="saveOrder">SAVE</button>
+                </div>
+
+            <?php endif; ?>
 
         </div>
     </div>
