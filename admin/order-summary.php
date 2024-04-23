@@ -5,6 +5,22 @@ if (!isset($_SESSION['productItems'])) {
 }
 ?>
 
+<!-- Modal -->
+<div class="modal fade" id="orderPlaceSuccessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="mb-3 p-4">
+                    <h5 id="orderPlaceSuccessMessage"></h5>
+                </div>
+                <a href="orders-list.php" class="btn btn-secondary">CLOSE</a>
+                <button type="button" class="btn btn-danger">PRINT</button>
+                <button type="button" class="btn btn-warning">DOWNLOAD PDF</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
 <div class="container-fluid px-4">
 
     <div class="card mt-4 shadow-sm">
